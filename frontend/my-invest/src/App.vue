@@ -1,11 +1,29 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import InputField from './components/InputField/InputField.vue';
+
+const username = ref("");
+const senha = ref("");
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <section>
+    <div class="container">
+      <InputField v-model="username" label="Usuario" placeholder="usuario" 
+        type="text"/>
+      <InputField v-model="senha" label="Senha" placeholder="senha" type="password"/>
+    </div>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  background-color: #1f1f1f;
+}
+
+</style>
