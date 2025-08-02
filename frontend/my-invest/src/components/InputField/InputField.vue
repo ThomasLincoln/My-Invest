@@ -1,37 +1,28 @@
 <script setup lang="ts">
-import { defineEmits } from 'vue';
-defineProps<{
-    label?: string
-    placeholder?: string
-    type?: string
-}>()
+import { defineModel, defineProps } from "vue";
 
-defineEmits(['update:modelValue'])
-const model = defineModel();
+defineProps<{
+  label?: string;
+  placeholder?: string;
+  type?: string;
+}>();
+
+const model = defineModel<string | number>();
 </script>
 <template>
-    <div class="container">
-        <label for="name">{{ label }}</label>
-        <input v-model="model" :type="type" :placeholder="placeholder" id="name">
-    </div>
+  <div class="flex flex-col mb-4">
+    <label :for="id" class="block text-gray-200 text-lg font-bold mb-2">
+      {{ label }}
+    </label>
+    <input
+      v-model="model"
+      :type="type"
+      :placeholder="placeholder"
+      :id="id"
+      class="outline-none border-b-2 border-b-indigo-500"
+    />
+  </div>
 </template>
 <style>
-.container{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-}
-
-.container label{
-    font-size: x-large;
-    margin-bottom: 0.4em;
-}
-.container input{
-    font-size: medium;
-    border: none;
-    border-bottom: 0.1em solid darkgray;
-    background: none;
-    color: white;
-    outline: none;
-}
+@import "tailwindcss";
 </style>
