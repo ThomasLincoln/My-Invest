@@ -1,6 +1,21 @@
 @import "tailwindcss";
+
+:root {
+  --cor-primaria: #7EF583;
+  --cor-secundaria: #F5B47D;
+  --cor-terciaria: #997DF5;
+
+  --cor-texto: #f3f4f6;
+  --cor-fundo: #1f2937;
+
+  --cor-sucesso: #10b981;
+  --cor-perda: #ef4444;
+  --cor-alerta: #f59e0b;
+}
+
 body {
   margin: 0;
   font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
-  color: rgb(230, 225, 219);
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
 }

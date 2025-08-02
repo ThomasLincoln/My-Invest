@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineModel, defineProps } from "vue";
-
 defineProps<{
   label?: string;
   placeholder?: string;
@@ -18,7 +16,7 @@ const model = defineModel<string | number>();
       v-model="model"
       :type="type"
       :placeholder="placeholder"
-      class="border-b-2 focus:border-violet-600 outline-hidden"
+      class="border-b-2 focus:border-(--cor-primaria) outline-hidden"
     />
   </div>
 </template>
