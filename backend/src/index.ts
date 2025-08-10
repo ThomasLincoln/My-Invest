@@ -2,20 +2,20 @@
 // Aplicar rotas e iniciar o servidor
 
 // === Dependências ===
-import { AppDataSource } from "./data-source";
 import * as express from "express";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
-import { User } from "./entity/User.entity";
+import { AppDataSource } from "./data-source";
+import { errorHandler } from "./middlewares/error.middleware";
+import { userRouter } from "./routes/user.routes";
 import "reflect-metadata";
-import { error } from "console";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-// Falta error handler
+app.use(errorHandler)
 const { PORT = 3000 } = process.env;
-// Faltam as rotas do usuário
+app.use("/auth", userRouter);
 
 app.get("*", (req: Request, res: Response) => {
   res.status(505).json({ message: "Bad Request" });
