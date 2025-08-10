@@ -1,4 +1,3 @@
-
 # My-Invest: Gerenciador de Investimentos
 
 Bem-vindo(a) ao repositório do My-Invest, uma plataforma para gerenciar seus investimentos.
@@ -9,8 +8,8 @@ Este documento contém as instruções para configurar e executar o projeto loca
 ## 🚀 Tecnologias Utilizadas
 
 - **Frontend**: Vue.js (^3.4.x)
-- **Backend**: Node.js (em desenvolvimento)
-- **Banco de Dados**: PostgreSQL (versão que você instalou)
+- **Backend**: Node.js (em desenvolvimento), Typescript, TypeORM
+- **Banco de Dados**: PostgreSQL (^16.0.0)
 
 ---
 
@@ -44,81 +43,45 @@ Para rodar a aplicação frontend, siga os passos abaixo:
 ---
 
 ## ⚙️ Backend
-Primeiro precisamos instalar as dependências, para isso é necessário executar o seguinte comando em `/backend`
-```bash
-npm i
-```
-Precisamos criar o .env, que deve ter as seguintes informações:
-```env
-DB_USER=
-DB_PASSWORD=
-DB_HOST=
-DB_PORT=
-DB_NAME=
-JWT_SECRET=
-```
+
+O backend é responsável pela lógica de negócio e persistência de dados. Ele é construído com Express e TypeScript, utilizando o **TypeORM** para interagir com o PostgreSQL.
+
+### Setup do Backend
+
+1.  **Instalação das Dependências:**
+    Abra o terminal na pasta `/backend` e instale os pacotes:
+    ```bash
+    npm install
+    ```
+2.  **Configuração de Ambiente (`.env`):**
+    Crie o arquivo `.env` na raiz da pasta `/backend` com as seguintes informações para a conexão com o banco de dados e autenticação:
+    ```env
+    DB_USER=
+    DB_PASSWORD=
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_NAME=myinvest_db
+    JWT_SECRET=
+    ```
+    - `DB_HOST` e `DB_PORT`: Onde o seu servidor PostgreSQL está rodando.
+    - `DB_NAME`: O nome do banco de dados que você criou para o projeto.
+
 ### Conexão com o PostgreSQL
-🚧 Precisa ser melhorado 🚧
 
-Isso é feito a partir do arquivo backend/db.ts, ele é um módulo de conexão, código:
+A conexão é gerenciada pelo **TypeORM** a partir do arquivo `data-source.ts`. Este arquivo 
+obtém as variáveis de ambiente e configura a conexão, além de definir quais entidades serão
+mapeadas para as tabelas.
 
-```js
-import dotenv from "dotenv";
-import { Pool } from "pg";
-import cron from "node-cron";
+As configurações princiáis são:
+- `type`: Define o tipo de banco a ser usado.
+- `entities`: Uma lista de todas as classes de entidade que o TypeORM irá 
+gerenciar, como a `User.entity.ts`.
+- `synchronize`: Define se o TypeORM deve sincronizar o esquema do banco de dados
+com as entidades automaticamente.
 
-// Carregar informações do .env
-dotenv.config();
+### Como Executar o Backend
 
-console.log("🔄 Loading environment variables...");
-console.log("user:", process.env.DB_USER);
-console.log("host:", process.env.DB_HOST);
-console.log("database:", process.env.DB_NAME);
-console.log("port:", process.env.DB_PORT);
-console.log("password:", process.env.DB_PASSWORD ? "********" : "not set");
-
-
-// Configuração da connection pool do postgresql
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: Number(process.env.DB_PORT),
-});
-
-// Verificar de forma assíncrona a conexão com o PostgreSQL
-async function verificarConexao(): Promise<void> {
-  try {
-    const client = await pool.connect();
-    console.log("✅ Connected to PostgreSQL database");
-    client.release();
-  }
-  catch (error) {
-    console.error('❌ Error connecting to the database:', error);
-  }
-}
-
-verificarConexao();
-export default pool;
+Para rodar o servidor de desenvolvimento, execute o seguinte comando na pasta `/backend`:
+```bash
+npm run start
 ```
-
----
-
-## 💾 Setup Inicial do Banco de Dados
-
-Para configurar o banco de dados, você precisa criar as tabelas necessárias.
-
-**Aviso:** O script abaixo é para o PostgreSQL. Ajuste o nome do banco de dados e as credenciais conforme a sua configuração.
-
-```sql
--- Script para a criação da tabela de usuários
-CREATE TABLE users(
-  user_id SERIAL Primary key,
-  first_name varchar(50) not null,
-  last_name varchar(50) not null,
-  email varchar(100) unique,
-  password_hash text not null,
-  created_at TIMESTAMP default current_timestamp,
-  last_login timestamp
-);
