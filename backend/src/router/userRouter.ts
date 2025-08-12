@@ -1,13 +1,12 @@
 import {
-  Column, CreateDateColumn, Entity, PrimaryGeneratedColumn,
+  Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  @Column({ name: "user_id" })
-  id?: number;
+  @PrimaryColumn()
+  id: number;
 
   @Column({ name: "first_name", length: 50, type: "varchar" })
   firstName?: string;
