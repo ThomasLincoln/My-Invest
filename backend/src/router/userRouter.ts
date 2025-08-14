@@ -1,28 +1,11 @@
-import {
-  Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
+import { Router } from "express";
+import { UserController } from "../controller/UserController";
 
-@Entity()
-export class User {
-  @PrimaryColumn()
-  id: number;
+const userRouter = Router();
+userRouter.get("/users", UserController.all);
+userRouter.post("/users", UserController.create)
+userRouter.get("/users/:id", UserController.findOne);
+userRouter.put("/users/:id", UserController.update);
+userRouter.delete("/users/:id", UserController.delete);
 
-  @Column({ name: "first_name", length: 50, type: "varchar" })
-  firstName?: string;
-
-  @Column({ name: "last_name", length: 50, type: "varchar" })
-  lastName?: string;
-
-  @Column({ name: "email", length: 100, type: "varchar" })
-  email?: string;
-
-  @Column({ name: "password_hash", length: 100, type: "varchar" })
-  passwordHash!: string;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-}
+export default userRouter;

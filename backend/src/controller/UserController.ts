@@ -1,53 +1,41 @@
-import { AppDataSource } from "../data-source"
-import { NextFunction, Request, Response } from "express"
-import { User } from "../entity/User"
+import { Request, Response } from "express";
+import { userRepository } from "../repository";
+import { encrypt } from "../helpers/helper";
+import { User } from "../entity/User";
 
 export class UserController {
-
-    private userRepository = AppDataSource.getRepository(User)
-
-    async all(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.find()
+    static async all(req: Request, res: Response) {
+        const data = await userRepository.findAll();
+        return res.status(200).send(data);
     }
 
-    async one(request: Request, response: Response, next: NextFunction) {
-        const id = parseInt(request.params.id)
-
-
-        const user = await this.userRepository.findOne({
-            where: { id }
-        })
-
-        if (!user) {
-            return "unregistered user"
-        }
-        return user
+    static async create(req: Request, res: Response) {
+        const { firstName, lastName, email, passwordHash } = req.body;
+        const encryptPassword = await encrypt.encryptPass(passwordHash);
+        const user = new User();
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.password = encryptPassword;
+        const data = await userRepository.createUser(user);
+        return res.status(200).send(data);
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
-        const { firstName, lastName, age } = request.body;
-
-        const user = Object.assign(new User(), {
-            firstName,
-            lastName,
-            age
-        })
-
-        return this.userRepository.save(user)
+    static async findOne(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const data = await userRepository.findOne(id);
+        return res.send(data);
     }
 
-    async remove(request: Request, response: Response, next: NextFunction) {
-        const id = parseInt(request.params.id)
-
-        let userToRemove = await this.userRepository.findOneBy({ id })
-
-        if (!userToRemove) {
-            return "this user not exist"
-        }
-
-        await this.userRepository.remove(userToRemove)
-
-        return "user has been removed"
+    static async update(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const data = await userRepository.updateUser(id, req.body);
+        return res.send(data);
     }
 
+    static async delete(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const data = await userRepository.delete(id);
+        return res.send(data);
+    }
 }
