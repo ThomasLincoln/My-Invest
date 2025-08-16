@@ -5,8 +5,12 @@ import Button from '@/components/Button/Button.vue';
 
 const username = ref("");
 const senha = ref("")
+const email = ref("")
 
 function login(){
+  if(senha.value.length < 6){
+    alert("senha muito curta")
+  }
   console.log("tentando cadastrar com ", username.value, senha.value);
 }
 </script>
