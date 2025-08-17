@@ -1,8 +1,13 @@
+<script setup lang="ts">
+
+
+
+</script>
 <template>
-  <h1>Hello App!</h1>
-  <p><strong>Current route path:</strong> {{ $route.fullPath }}</p>
+  <p><strong>Current route path:</strong> {{ $route.path }}</p>
   <nav>
     <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/login">Go to Login</RouterLink>
+    <RouterLink to="/cadastro">Cadastrar</RouterLink>
   </nav>
+  <ToastNotification/>
 </template>
