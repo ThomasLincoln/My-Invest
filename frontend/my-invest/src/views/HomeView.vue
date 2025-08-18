@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-
+import ToastNot from '@/components/ToastNotification/ToastNot.vue';
 
 </script>
 <template>
@@ -9,5 +8,5 @@
     <RouterLink to="/">Go to Home</RouterLink>
     <RouterLink to="/cadastro">Cadastrar</RouterLink>
   </nav>
-  <ToastNotification/>
+  <ToastNot />
 </template>
