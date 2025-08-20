@@ -16,7 +16,7 @@ const model = defineModel<string | number>();
       v-model="model"
       :type="type"
       :placeholder="placeholder"
-      class="border-b-2 focus:border-(--cor-primaria) outline-hidden"
+      class="border-b-2 focus:border-(--cor-primaria) outline-hidden bg-gray-800"
     />
   </div>
 </template>

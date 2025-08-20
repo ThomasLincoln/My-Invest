@@ -1,34 +1,41 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 import InputField from '@/components/InputField/InputField.vue';
 import Button from '@/components/Button/Button.vue';
 import { useToastStore } from '@/store/ToastStore';
 import NotificationManager from '@/components/NotificationManager/NotificationManager.vue';
 
-const username = ref("");
+const firstName = ref("");
+const lastName = ref("");
 const senha = ref("")
 const email = ref("")
 const toastStore = useToastStore();
-let resultado = true;
 
-
-function cadastro() {
-  if (resultado) {
-    toastStore.addNotification("Cadastro feito", "success")
-    resultado = !resultado;
-  } else if (!resultado) {
-    toastStore.addNotification("Aconteceu algum erro", "error")
-    resultado = !resultado;
+async function cadastro() {
+  const dadosFormulario = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    passwordHash: senha.value
   }
-
-  console.log("tentando cadastrar com ", username.value, senha.value);
+  try {
+    const response = await axios.post('http://localhost:3000/api/users', dadosFormulario);
+    console.log("Resposta do backend:", response.data);
+    toastStore.addNotification("Cadastro feito", "success");
+  } catch (error) {
+    console.error("Erro ao se cadastrar:", error);
+    const mensagemErro = error.response?.data?.message || "Aconteceu um erro ao tentar se cadastrar"
+    toastStore.addNotification(mensagemErro, "error")
+  }
 }
 </script>
 
 <template>
   <section>
     <div class="flex flex-col justify-center items-center h-screen">
-      <InputField v-model="username" label="Usuario" placeholder="seu nome de usuario" type="text" />
+      <InputField v-model="firstName" label="Primeiro nome" placeholder="seu primeiro nome" type="text" />
+      <InputField v-model="lastName" label="Sobrenome" placeholder="seu sobrenome" type="text" />
       <InputField v-model="email" label="Email" placeholder="seu email" type="email" />
       <InputField v-model="senha" label="Senha" placeholder="sua senha" type="password" />
       <Button label="Entrar" @click="cadastro" />
