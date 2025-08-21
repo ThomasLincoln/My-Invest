@@ -11,6 +11,8 @@ const senha = ref("")
 const toastStore = useToastStore();
 const router = useRouter();
 
+axios.defaults.withCredentials = true;
+
 async function login() {
   const dadosFormulario = {
     email: email.value,

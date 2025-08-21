@@ -4,14 +4,15 @@ import * as cors from "cors";
 import { AppDataSource } from "./data-source"
 import userRouter from "./router/userRouter"
 import { errorHandler } from "./middleware/ErrorMiddleware";
-
+import * as cookieParser from "cookie-parser";
 
 const { PORT = 3000 } = process.env;
 
 AppDataSource.initialize().then(async () => {
     const app = express()
     app.use(bodyParser.json())
-    app.use(cors({ origin: "http://localhost:5173" })); 
+    app.use(cookieParser());
+    app.use(cors({ origin: "http://localhost:5173" }));
     app.use(errorHandler);
     app.use("/api", userRouter)
     app.listen(PORT)
