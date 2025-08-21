@@ -1,16 +1,17 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRouter, useRoute } from 'vue-router';
 import InputField from '@/components/InputField/InputField.vue';
 import Button from '@/components/Button/Button.vue';
 import { useToastStore } from '@/store/ToastStore';
-import NotificationManager from '@/components/NotificationManager/NotificationManager.vue';
 
 const firstName = ref("");
 const lastName = ref("");
-const senha = ref("")
-const email = ref("")
+const senha = ref("");
+const email = ref("");
 const toastStore = useToastStore();
+const router = useRouter();
 
 async function cadastro() {
   const dadosFormulario = {
@@ -29,6 +30,10 @@ async function cadastro() {
     toastStore.addNotification(mensagemErro, "error")
   }
 }
+
+function navigateToLogin() {
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -38,8 +43,10 @@ async function cadastro() {
       <InputField v-model="lastName" label="Sobrenome" placeholder="seu sobrenome" type="text" />
       <InputField v-model="email" label="Email" placeholder="seu email" type="email" />
       <InputField v-model="senha" label="Senha" placeholder="sua senha" type="password" />
-      <Button label="Entrar" @click="cadastro" />
+      <div class="flex flex-col justify-center items-center">
+        <Button label="Cadastrar" @click="cadastro" class="mb-2" />
+        <Button label="Entrar" @click="navigateToLogin" />
+      </div>
     </div>
-    <NotificationManager />
   </section>
 </template>

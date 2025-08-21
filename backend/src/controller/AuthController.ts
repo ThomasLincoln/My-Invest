@@ -2,7 +2,7 @@ import { Request, Response, Nect } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 import { encrypt } from "../helpers/helper";
-import { UserResponse } from "../dto/User-DTO";
+import { UserResponse, type Payload } from "../dto/User-DTO";
 
 export class AuthController {
   static async login(req: Request, res: Response) {
@@ -14,21 +14,29 @@ export class AuthController {
           .status(500)
           .json({ message: "email and password required" });
       }
-      
+
       const userRepository = AppDataSource.getRepository(User);
       const user = await userRepository.findOne({ where: { email } });
 
-      console.log("verificando se a senha é válida");
-      const isPasswordValid = encrypt.comparePassword(user.password, password);
-      if (!user || !isPasswordValid) {
+      if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-      const token = encrypt.generateToken({ id: user.id, email: user.email });  
+      console.log("verificando se a senha é válida");
+      const isPasswordValid = encrypt.comparePassword(user.password, password);
+      if (!isPasswordValid) {
+        return res.status(404).json({ message: "Password Invalid" });
+      }
+      const payload: Payload = {
+        id: Number(user.id),
+        email: String(user.email),
+      }
+
+      const token = encrypt.generateToken(payload);
       const userResponse = new UserResponse;
-      userResponse.email = user.email;
-      userResponse.firstName = user.firstName;
-      userResponse.lastName = user.lastName;
+      userResponse.email = String(user.email);
+      userResponse.firstName = String(user.firstName);
+      userResponse.lastName = String(user.lastName);
       userResponse.token = token;
 
       return res.status(200).json({ message: "Login Succesfull", userResponse });

@@ -6,6 +6,7 @@ defineProps<{
 }>();
 
 const model = defineModel<string | number>();
+
 </script>
 <template>
   <div class="flex flex-col mb-4">
