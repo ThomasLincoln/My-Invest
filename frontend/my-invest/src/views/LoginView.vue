@@ -14,10 +14,11 @@ const router = useRouter();
 axios.defaults.withCredentials = true;
 
 async function login() {
+  router.push("/profile");
   const dadosFormulario = {
     email: email.value,
     password: senha.value,
-  }
+  };
 
   try {
     console.log(dadosFormulario)
