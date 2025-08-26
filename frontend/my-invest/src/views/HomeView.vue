@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NotificationManager from '@/components/NotificationManager/NotificationManager.vue';
+import SideBar from '@/components/SideBar.vue';
 
 </script>
 <template>
@@ -8,5 +9,5 @@ import NotificationManager from '@/components/NotificationManager/NotificationMa
     <RouterLink to="/">Go to Home</RouterLink>
     <RouterLink to="/cadastro">Cadastrar</RouterLink>
   </nav>
-  <NotificationManager/>
+  <NotificationManager />
 </template>

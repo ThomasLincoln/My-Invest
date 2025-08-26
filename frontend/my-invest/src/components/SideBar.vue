@@ -1,10 +1,11 @@
 <template>
   <div :class="{ 'w-64': !isCollapsed, 'w-16': isCollapsed }"
-    class="bg-gray-200 text-black flex flex-col justify-between h-screen transition-all duration-300 ease-in-out fixed">
+    class="bg-gray-200 text-black flex flex-col justify-between h-screen transition-all duration-100 ease-in-out fixed">
     <div class="flex flex-col flex-grow p-4">
       <div class="mb-8 flex items-center border-b-2 border-gray-300">
-        <h1 v-if="!isCollapsed" class="text-xl font-bold">InvestPro</h1>
-        <button @click="toggleSidebar" class="ml-auto m-2 h-10 w-10 rounded hover:bg-indigo-400 hover:text-white">
+        <h1 v-if="!isCollapsed" class="text-xl font-bold">My Invest</h1>
+        <button @click="$emit('toggle-sidebar')"
+          class="ml-auto m-2 h-10 w-10 rounded hover:bg-indigo-400 hover:text-white">
           <span class="material-symbols-outlined h-6 w-6 transform transition-transform select-none"
             :class="{ 'rotate-180': !isCollapsed }">
             chevron_right
@@ -30,8 +31,8 @@
       </nav>
     </div>
 
-    <div class="p-4 border-t border-gray-700">
-      <ul>
+    <div class="p-4  border-gray-700">
+      <ul class="border-t-2 border-gray-300">
         <li v-for="item in footerItems" :key="item.name" class="mb-2">
           <router-link :to="item.path"
             class="flex items-center p-2 rounded-md hover:bg-indigo-400 hover:text-white transition-colors"
@@ -48,14 +49,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { defineProps, defineEmits } from 'vue';
+defineProps({
+  isCollapsed: {
+    type: Boolean,
+    required: true
+  }
+})
 
-const isCollapsed = ref(false);
-
-const toggleSidebar = () => {
-  isCollapsed.value = !isCollapsed.value;
-};
-
+defineEmits(['toggle-sidebar'])
 // Dados para os itens do menu
 // Voce pode usar uma biblioteca de icones ou copiar o path SVG.
 const menuItems = [

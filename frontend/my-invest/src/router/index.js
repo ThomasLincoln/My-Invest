@@ -9,22 +9,34 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      hideSidebar: false,
+    }
   },
   {
     path: '/cadastro',
     name: 'Cadastro',
-    component: SignupView
+    component: SignupView,
+    meta: {
+      hideSidebar: true,
+    }
   },
   {
-    path: '/login',
+    path: '/entrar',
     name: 'Login',
-    component: LoginView
+    component: LoginView,
+    meta: {
+      hideSidebar: true,
+    }
   },
   {
-    path: '/profile',
+    path: '/perfil',
     name: 'Profile',
-    component: ProfileView
+    component: ProfileView,
+    meta: {
+      hideSidebar: false,
+    }
   }
 ]
 

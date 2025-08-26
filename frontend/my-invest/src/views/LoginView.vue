@@ -14,7 +14,7 @@ const router = useRouter();
 axios.defaults.withCredentials = true;
 
 async function login() {
-  router.push("/profile");
+  router.push("/perfil");
   const dadosFormulario = {
     email: email.value,
     password: senha.value,

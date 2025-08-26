@@ -32,7 +32,7 @@ async function cadastro() {
 }
 
 function navigateToLogin() {
-  router.push("/login");
+  router.push("/entrar");
 }
 </script>
 
