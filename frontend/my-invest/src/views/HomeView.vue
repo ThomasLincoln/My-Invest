@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NotificationManager from '@/components/NotificationManager/NotificationManager.vue';
-import SideBar from '@/components/SideBar.vue';
 
 </script>
 <template>

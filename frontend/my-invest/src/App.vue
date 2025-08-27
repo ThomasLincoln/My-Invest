@@ -12,7 +12,7 @@ const toggleSidebar = () => {
 <template>
     <template v-if="!$route.meta.hideSidebar">
         <SideBar :isCollapsed="isCollapsed" @toggle-sidebar="toggleSidebar" />
-        <main class="flex-grow p-4 transtion-all duration-100 ease-in-out" :class="{
+        <main class="flex-grow transtion-all duration-100 ease-in-out" :class="{
             'ml-64': !isCollapsed,
             'ml-16': isCollapsed
         }">

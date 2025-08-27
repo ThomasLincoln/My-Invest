@@ -31,8 +31,8 @@
       </nav>
     </div>
 
-    <div class="p-4  border-gray-700">
-      <ul class="border-t-2 border-gray-300">
+    <div class="border-gray-300 border-t-2 mx-4">
+      <ul class="mt-4 border-gray-300">
         <li v-for="item in footerItems" :key="item.name" class="mb-2">
           <router-link :to="item.path"
             class="flex items-center p-2 rounded-md hover:bg-indigo-400 hover:text-white transition-colors"

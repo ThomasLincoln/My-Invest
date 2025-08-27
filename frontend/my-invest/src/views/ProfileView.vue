@@ -1,5 +1,9 @@
 <script setup>
+import NavBar from '@/components/NavBar.vue';
 </script>
 <template>
-  <h1>Tela de perfil</h1>
+  <NavBar />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
