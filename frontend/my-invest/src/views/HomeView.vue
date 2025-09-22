@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import NotificationManager from '@/components/NotificationManager/NotificationManager.vue';
-
+import NotificationManager from "@/components/NotificationManager/NotificationManager.vue";
+import Header from "@/components/Header.vue";
+import Sidebar from "@/components/Sidebar.vue";
 </script>
 <template>
-  <p><strong>Current route path:</strong> {{ $route.path }}</p>
-  <nav>
-    <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/cadastro">Cadastrar</RouterLink>
-  </nav>
+  <div class="flex min-h-screen">
+    <div class="w-64 bg-white border-r border-gray-300">
+      <Sidebar></Sidebar>
+    </div>
+    <Header />
+  </div>
+  Home
   <NotificationManager />
 </template>

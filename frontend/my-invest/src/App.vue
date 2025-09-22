@@ -1,7 +1,6 @@
 <script setup>
 import NotificationManager from "@/components/NotificationManager/NotificationManager.vue";
 import { ref } from "vue";
-import Header from "@/components/Header.vue";
 
 const isCollapsed = ref(true);
 const toggleSidebar = () => {
@@ -11,14 +10,7 @@ const toggleSidebar = () => {
 
 <template>
   <template v-if="!$route.meta.hideSidebar">
-    <main
-      class="flex-grow transtion-all duration-100 ease-in-out"
-      :class="{
-        'ml-64': !isCollapsed,
-        'ml-16': isCollapsed,
-      }"
-    >
-      <Header />
+    <main class="flex-grow transtion-all duration-100 ease-in-out">
       <RouterView />
     </main>
     <NotificationManager />

@@ -1,4 +1,8 @@
 <template>
-  <button class="bg-blue-500 text-white p-1 rounded-sm">teste</button>
+  <button
+    class="bg-violet-400 hover:bg-violet-600 text-white px-6 py-2 rounded-lg cursor-pointer"
+  >
+    + Adicionar Ativo
+  </button>
 </template>
 <script></script>
