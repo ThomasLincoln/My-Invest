@@ -3,47 +3,31 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
-import SignupView from '@/views/SignupView.vue'
-import LoginView from '@/views/LoginView.vue'
-import ProfileView from '@/views/ProfileView.vue'
-import DadosPessoais from '@/views/Perfil/DadosPessoais.vue'
-import Preferencias from '@/views/Perfil/Preferencias.vue'
-import Seguranca from '@/views/Perfil/Seguranca.vue'
+import DashboardView from '@/views/DashboardView.vue'
+import MetasView from '@/views/MetasView.vue'
+import PortfolioView from '@/views/PortfolioView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: HomeView,
-    meta: {
-      hideSidebar: false,
-    }
   },
-  // {
-  //   path: '/perfil',
-  //   name: 'Perfil',
-  //   component: ProfileView,
-  //   meta: {
-  //     hideSidebar: false,
-  //   },
-  //   children: [
-  //     {
-  //       path: '',
-  //       name: 'Perfil.Dados',
-  //       component: DadosPessoais
-  //     },
-  //     {
-  //       path: 'seguranca',
-  //       name: 'Perfil.Seguranca',
-  //       component: Seguranca
-  //     },
-  //     {
-  //       path: 'preferencias',
-  //       name: 'Perfil.Preferencias',
-  //       component: Preferencias
-  //     },
-  //   ]
-  // }
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: DashboardView,
+  },
+  {
+    path: '/metas',
+    name: 'Metas',
+    component: MetasView,
+  },
+  {
+    path: '/portfolio',
+    name: 'Portfolio',
+    component: PortfolioView,
+  },
 ]
 
 const router = createRouter({

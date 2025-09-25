@@ -15,7 +15,7 @@ const handleToggle = (isCollapsed: boolean) => {
     <Sidebar @toggle-collapse="handleToggle"></Sidebar>
     <div :class="['flex-1 transition-all duration-300 ease-in-out']">
       <Header />
-      Home
+      Portfolio
     </div>
   </div>
   <NotificationManager />
