@@ -14,7 +14,7 @@ const handleToggle = (isCollapsed: boolean) => {
   <div class="flex min-h-screen">
     <Sidebar @toggle-collapse="handleToggle"></Sidebar>
     <div :class="['flex-1 transition-all duration-300 ease-in-out']">
-      <Header />
+      <Header tituloPagina="Metas" />
       Metas
     </div>
   </div>
