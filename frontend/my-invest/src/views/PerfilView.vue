@@ -4,9 +4,12 @@ import NotificationManager from "@/components/NotificationManager/NotificationMa
 import Header from "@/components/Header.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Button from "@/components/Button.vue";
+import CustomInput from "@/components/CustomInput.vue";
 
-const isSidebarCollapsed = ref(false);
-const activeOption = ref("perfil");
+const isSidebarCollapsed = ref<Boolean>(false);
+const activeOption = ref<String>("perfil");
+const nome = ref<String>("");
+const username = ref<String>("");
 
 const handleToggle = (isCollapsed: boolean) => {
   isSidebarCollapsed.value = isCollapsed;
@@ -60,23 +63,97 @@ const handleOption = (option: string) => {
             />
             <div class="ml-4">
               <h2 class="text-xl mb-4">Foto de Perfil</h2>
-              <div class="flex mb-2">
+              <div class="flex mb-2 gap-x-4">
                 <Button
                   Descricao="Importar Imagem"
                   icone="upload"
                   class="mr-4"
                   :tamanho="1"
+                  tipo="comFundo"
                 />
-                <Button Descricao="Apagar" icone="delete" :tamanho="1" />
+                <Button Descricao="Apagar" icone="delete" :tamanho="1" tipo="comFundo" />
               </div>
               <p class="text-gray-500 text-xs">
                 Suportamos PNGs,JPGs e GIFs, abaixo de 10mb
               </p>
             </div>
           </div>
+          <!-- Username -->
+          <div class="flex gap-x-4">
+            <CustomInput label="Nome Completo" modelValue="nome" />
+            <CustomInput label="Username" modelValue="username" />
+          </div>
+          <div class="flex gap-x-4">
+            <CustomInput label="Telefone" modelValue="phone" />
+            <CustomInput label="Email" modelValue="email" />
+          </div>
+          <div class="flex gap-x-4 mt-6">
+            <Button
+              Descricao="Salvar mudanças"
+              icone="save"
+              class="mt-6"
+              :tamanho="2"
+              tipo="comFundo"
+            />
+            <Button
+              Descricao="Cancelar"
+              icone=""
+              class="mt-6"
+              :tamanho="2"
+              tipo="semFundo"
+            />
+          </div>
         </div>
-        <div v-if="activeOption == 'config'">Configurações</div>
-        <div v-if="activeOption == 'not'">Notificação</div>
+        <div v-if="activeOption == 'config'">
+          <div class="mb-6 pb-6 border-b-1 border-gray-200">
+            <h1 class="text-2xl">Configurações</h1>
+            <p class="text-gray-500 text-sm">
+              Gerencie sua senha e configurações de segurança
+            </p>
+          </div>
+          <div>
+            <CustomInput label="Senha Atual" modelValue="password" />
+            <CustomInput label="Nova Senha" modelValue="newPassword" />
+            <CustomInput label="Confirmar Senha" modelValue="confirmNewPassword" />
+          </div>
+          <div class="mt-6">
+            <Button
+              Descricao="Salvar mudanças"
+              icone="save"
+              :tamanho="2"
+              tipo="comFundo"
+            />
+          </div>
+        </div>
+        <div v-if="activeOption == 'not'">
+          <div class="mb-6 pb-6 border-b-1 border-gray-200">
+            <h1 class="text-2xl">Notificações</h1>
+            <p class="text-gray-500 text-sm">
+              Gerencie sua senha e configurações de segurança
+            </p>
+          </div>
+          <div class="flex flex-col gap-y-8">
+            <div class="w-full pb-4 border-b-1 border-gray-300">
+              <h1 class="text-xl mb-2">Alertas do Mercado</h1>
+              <p class="text-gray-500 text-sm mb-2">
+                Receba notificações sobre movimentações sobre o mercado
+              </p>
+              <Button Descricao="Configurar" :tamanho="1" tipo="semFundo" />
+            </div>
+            <div class="w-full pb-4 border-b-1 border-gray-300">
+              <h1 class="text-xl mb-2">Recomendações</h1>
+              <p class="text-gray-500 text-sm mb-2">
+                Sugestões personalizadas de investimento
+              </p>
+              <Button Descricao="Configurar" :tamanho="1" tipo="semFundo" />
+            </div>
+            <div class="w-full pb-4 border-b-1 border-gray-300">
+              <h1 class="text-xl mb-2">Relatórios</h1>
+              <p class="text-gray-500 text-sm mb-2">Resumos mensais do seu portfólio</p>
+              <Button Descricao="Configurar" :tamanho="1" tipo="semFundo" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
