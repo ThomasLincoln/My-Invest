@@ -8,7 +8,9 @@
     <div class="flex flex-col justify-between h-full">
       <div>
         <!-- Logo -->
-        <div class="py-4 px-5 mt-2 flex items-center justify-between">
+        <div
+          class="py-4 px-2 mx-3 mt-2 flex items-center border-b-1 border-slate-200 justify-between"
+        >
           <a href="" v-if="!isCollapsed && isTextVisible" class="pl-2"> My Invest </a>
           <span
             @click="toggleSidebar"
@@ -21,13 +23,13 @@
         <!-- Opções -->
         <div class="ml-4 mt-6 pr-5">
           <div>
-            <RouterLink
+            <!-- <RouterLink
               to="/dashboard"
               class="px-2 py-2 mb-2 flex items-center rounded-lg hover:bg-violet-500 hover:text-white cursor-pointer"
             >
               <span class="material-symbols-outlined"> dashboard </span>
               <span class="ml-4" v-if="!isCollapsed && isTextVisible"> Dashboard </span>
-            </RouterLink>
+            </RouterLink> -->
             <RouterLink
               to="/portfolio"
               class="px-2 py-2 mb-2 flex items-center rounded-lg hover:bg-violet-500 hover:text-white cursor-pointer"
@@ -35,13 +37,13 @@
               <span class="material-symbols-outlined"> account_balance_wallet </span>
               <span class="ml-4" v-if="!isCollapsed && isTextVisible"> Portfólio</span>
             </RouterLink>
-            <RouterLink
+            <!-- <RouterLink
               to="/metas"
               class="px-2 py-2 mb-2 flex items-center rounded-lg hover:bg-violet-500 hover:text-white cursor-pointer"
             >
               <span class="material-symbols-outlined"> trophy </span>
               <span class="ml-4" v-if="!isCollapsed && isTextVisible"> Metas </span>
-            </RouterLink>
+            </RouterLink> -->
           </div>
         </div>
       </div>

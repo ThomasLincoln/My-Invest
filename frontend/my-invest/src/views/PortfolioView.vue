@@ -354,22 +354,25 @@ const handleToggle = (isCollapsed: boolean) => {
         </div>
       </div>
       <!-- Insights do Mercado, Recomendações e Transações Recentes -->
-      <div class="flex mb-4">
+      <!-- <div class="flex mb-4">
         <div class="grow">
           <div class="bg-white rounded-lg shadow-md mx-3 ml-3 mb-4 p-4">
             <h1 class="text-2xl">Insights do Mercado</h1>
             <p class="text-sm">Últimas tendências e análises</p>
+            <p class="text-sm">🚧 Em desenvolvimento 🚧</p>
           </div>
           <div class="bg-white rounded-lg shadow-md mx-3 ml-3 p-4">
             <h1 class="text-2xl">Recomendações</h1>
             <p class="text-sm">Sugestões para o seu portfólio</p>
+            <p class="text-sm">🚧 Em desenvolvimento 🚧</p>
           </div>
         </div>
         <div class="bg-white rounded-lg shadow-md mx-3 ml-1 w-110 p-4">
-            <h1 class="text-2xl">Transações Recentes</h1>
-            <p class="text-sm">Sua atividade de investimento mais recente</p>
+          <h1 class="text-2xl">Transações Recentes</h1>
+          <p class="text-sm">Sua atividade de investimento mais recente</p>
+          <p class="text-sm">🚧 Em desenvolvimento 🚧</p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <NotificationManager />

@@ -20,7 +20,7 @@ const handleOption = (option: string) => {
 };
 </script>
 <template>
-  <div class="flex min-h-screen bg-white">
+  <div class="flex min-h-screen">
     <Sidebar @toggle-collapse="handleToggle"></Sidebar>
     <div :class="['flex-1 transition-all duration-300 ease-in-out']">
       <Header tituloPagina="Configurações da Conta" />
@@ -38,16 +38,16 @@ const handleOption = (option: string) => {
           >
             Configurações
           </button>
-          <button
+          <!-- <button
             class="px-4 py-2 text-sm font-medium border border-gray-200 bg-white rounded-r-lg cursor-pointer hover:bg-violet-600 hover:text-white"
             @click="handleOption('not')"
           >
             Notificação
-          </button>
+          </button> -->
         </div>
       </div>
       <!-- Campos -->
-      <div class="m-6">
+      <div class="m-6 bg-white rounded-lg shadow-md mx-3 ml-4 w-[98.5%] p-4">
         <div v-if="activeOption == 'perfil'">
           <div class="mb-6 pb-6 border-b-1 border-gray-200">
             <h1 class="text-2xl">Perfil</h1>
