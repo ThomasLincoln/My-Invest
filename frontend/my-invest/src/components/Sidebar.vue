@@ -31,7 +31,7 @@
               <span class="ml-4" v-if="!isCollapsed && isTextVisible"> Dashboard </span>
             </RouterLink> -->
             <RouterLink
-              to="/portfolio"
+              to="/"
               class="px-2 py-2 mb-2 flex items-center rounded-lg hover:bg-violet-500 hover:text-white cursor-pointer"
             >
               <span class="material-symbols-outlined"> account_balance_wallet </span>
