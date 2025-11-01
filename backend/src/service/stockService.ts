@@ -28,4 +28,17 @@ export default class StockService {
       throw new Error("Não foi possível obter os dados do ativo na API externa.");
     }
   }
+  async fetchStockTickers() {
+    try {
+      const stockData = await client.quote.list();
+      if(!stockData){
+        throw new Error("Erro ao capturar os ativos");
+
+      }
+      return stockData;
+    } catch (error) {
+      console.error(`Brapi API error for obtain all tickers:`, error.message);
+      throw new Error("Não foi possível obter os dados dos ativos na API externa.");
+    }
+  }
 }
