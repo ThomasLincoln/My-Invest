@@ -5,9 +5,15 @@ import Header from "@/components/Header.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Chart from "@/components/Chart.vue";
 import Button from "@/components/Button.vue";
+import Modal from "@/components/Modal.vue";
 
 const isSidebarCollapsed = ref(false);
 const adicionarItem = ref(true);
+const isModalAtivoOpen = ref(false);
+
+function abrirModalDeAtivo() {
+  isModalAtivoOpen.value = true;
+}
 
 const handleToggle = (isCollapsed: boolean) => {
   isSidebarCollapsed.value = isCollapsed;
@@ -17,19 +23,23 @@ const handleToggle = (isCollapsed: boolean) => {
   <div class="flex min-h-screen">
     <Sidebar @toggle-collapse="handleToggle"></Sidebar>
     <div :class="['flex-1 transition-all duration-300 ease-in-out']">
-      <Header tituloPagina="Portfolio" :adicionar-item="adicionarItem" />
+      <Header
+        tituloPagina="Portfolio"
+        :adicionar-item="adicionarItem"
+        @abrir-modal-ativo="abrirModalDeAtivo"
+      />
       <div class="flex mb-4 ml-2 mr-2">
         <div class="bg-white rounded-lg shadow-md grow p-4 mx-2">
           <div class="flex justify-between mb-12 items-center">
             <h3 class="text-sm">Valor total do Portfólio</h3>
-            <span class="material-symbols-outlined" style="font-size: 1.5pc">
+            <span class="material-symbols-outlined select-none" style="font-size: 1.5pc">
               attach_money
             </span>
           </div>
           <h2 class="text-2xl font-medium">R$ 123.456.789</h2>
           <div class="flex items-center">
             <span
-              class="material-symbols-outlined"
+              class="material-symbols-outlined select-none"
               style="font-size: 1.2pc; color: green"
             >
               trending_up
@@ -41,14 +51,14 @@ const handleToggle = (isCollapsed: boolean) => {
         <div class="bg-white rounded-lg shadow-md grow mx-2 p-4">
           <div class="flex justify-between mb-12 items-center">
             <h3 class="text-sm">Ganho/Perda de Hoje</h3>
-            <span class="material-symbols-outlined" style="font-size: 1.5pc">
+            <span class="material-symbols-outlined select-none" style="font-size: 1.5pc">
               trending_up
             </span>
           </div>
           <h2 class="text-2xl font-medium text-green-600">+R$ 123</h2>
           <div class="flex items-center">
             <span
-              class="material-symbols-outlined"
+              class="material-symbols-outlined select-none"
               style="font-size: 1.2pc; color: green"
             >
               trending_up
@@ -60,7 +70,7 @@ const handleToggle = (isCollapsed: boolean) => {
         <div class="bg-white rounded-lg shadow-md grow mx-2 p-4">
           <div class="flex justify-between mb-12 items-center">
             <h3 class="text-sm">Total de Investimentos</h3>
-            <span class="material-symbols-outlined" style="font-size: 1.5pc">
+            <span class="material-symbols-outlined select-none" style="font-size: 1.5pc">
               attach_money
             </span>
           </div>
@@ -73,7 +83,7 @@ const handleToggle = (isCollapsed: boolean) => {
         <div class="bg-white rounded-lg shadow-md grow mx-2 p-4">
           <div class="flex justify-between mb-12 items-center">
             <h3 class="text-sm">Índice Sharpe</h3>
-            <span class="material-symbols-outlined" style="font-size: 1.5pc">
+            <span class="material-symbols-outlined select-none" style="font-size: 1.5pc">
               planner_review
             </span>
           </div>
@@ -94,7 +104,7 @@ const handleToggle = (isCollapsed: boolean) => {
         >
           <div>
             <div class="flex mb-2">
-              <span class="material-symbols-outlined mr-2"> shield </span>
+              <span class="material-symbols-outlined select-none mr-2"> shield </span>
               <h2>Métricas de Risco</h2>
             </div>
             <p class="text-xs">Análise de risco do seu portfólio</p>
@@ -145,7 +155,9 @@ const handleToggle = (isCollapsed: boolean) => {
           </div>
           <div>
             <div class="flex">
-              <span class="material-symbols-outlined mr-2"> trending_up </span>
+              <span class="material-symbols-outlined mr-2 select-none">
+                trending_up
+              </span>
               <p>Score de Risco Geral</p>
             </div>
             <h2 class="text-4xl text-green-700">7.2/10</h2>
@@ -179,7 +191,7 @@ const handleToggle = (isCollapsed: boolean) => {
               <p class="text-xl">R$ 8.800,50</p>
               <div class="flex items-center">
                 <span
-                  class="material-symbols-outlined mr-2"
+                  class="material-symbols-outlined mr-2 select-none"
                   style="font-size: 1.2pc; color: green"
                 >
                   trending_up
@@ -207,7 +219,7 @@ const handleToggle = (isCollapsed: boolean) => {
               <p class="text-xl">R$ 8.800,50</p>
               <div class="flex items-center">
                 <span
-                  class="material-symbols-outlined mr-2"
+                  class="material-symbols-outlined mr-2 select-none"
                   style="font-size: 1.2pc; color: green"
                 >
                   trending_up
@@ -236,7 +248,7 @@ const handleToggle = (isCollapsed: boolean) => {
               <p class="text-xl">R$ 8.800,50</p>
               <div class="flex items-center">
                 <span
-                  class="material-symbols-outlined mr-2"
+                  class="material-symbols-outlined mr-2 select-none"
                   style="font-size: 1.2pc; color: green"
                 >
                   trending_up
@@ -264,7 +276,7 @@ const handleToggle = (isCollapsed: boolean) => {
               <p class="text-xl">R$ 8.800,50</p>
               <div class="flex items-center">
                 <span
-                  class="material-symbols-outlined mr-2"
+                  class="material-symbols-outlined mr-2 select-none"
                   style="font-size: 1.2pc; color: green"
                 >
                   trending_up
@@ -376,4 +388,10 @@ const handleToggle = (isCollapsed: boolean) => {
     </div>
   </div>
   <NotificationManager />
+  <Modal v-model="isModalAtivoOpen" title="Adicionar Novo Ativo">
+    <form>
+      <label>Formulário de Ativo</label>
+      <input type="text" placeholder="Código do Ativo" />
+    </form>
+  </Modal>
 </template>

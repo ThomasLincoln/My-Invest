@@ -12,6 +12,7 @@ export default {
   emits: ["abrir-modal-ativo"],
   methods: {
     notificarPaiParaAbrirModal() {
+      console.log("1. [Header] Botão clicado. Emitindo @abrir-modal-ativo"); // <-- ADICIONE ISSO
       this.$emit("abrir-modal-ativo");
     },
   },
@@ -24,13 +25,8 @@ export default {
   >
     <h1 class="mr-2 pl-2 text-xl" div="#titulo">{{ tituloPagina }}</h1>
 
-    <div v-if="adicionarItem">
-      <Button
-        Descricao="+ Adicionar Ativo"
-        :tamanho="2"
-        tipo="comFundo"
-        @click="notificarPaiParaAbrirModal"
-      />
+    <div v-if="adicionarItem" @click="notificarPaiParaAbrirModal">
+      <Button Descricao="+ Adicionar Ativo" :tamanho="2" tipo="comFundo" />
     </div>
   </container>
 </template>
