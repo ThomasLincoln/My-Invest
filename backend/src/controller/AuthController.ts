@@ -1,8 +1,8 @@
 import { Request, Response, Nect } from "express";
 import { AppDataSource } from "../data-source";
-import { User } from "../entity/User";
 import { encrypt } from "../helpers/helper";
-import { UserResponse, type Payload } from "../dto/User-DTO";
+import { type Payload } from "../dto/User-DTO";
+import { User } from "../entity/User";
 
 export class AuthController {
   static async login(req: Request, res: Response) {
@@ -38,7 +38,7 @@ export class AuthController {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: 'strict',
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60 * 60 * 24 * 7
       });
 
       const userResponse = {
@@ -52,5 +52,16 @@ export class AuthController {
       console.error(error);
       return res.status(500).json({ message: "Internal server error" });
     }
+  }
+
+  static async me(req: Request, res: Response){
+    const user = req.user!;
+
+    const userResponse = { 
+      email: String(user.email),
+      firstName: String(user.firstName),
+      lastName: String(user.lastName),
+    }
+    return res.status(200).json(userResponse);
   }
 }

@@ -4,10 +4,13 @@ import StockService from "../service/stockService";
 export class StockController {
   static async getStockInfo(req: Request, res: Response) {
     console.log(req)
-    const { ticker } = req.body;
+    const { ticker } = req.query;
     const stockService = new StockService();
 
     try {
+      if(!ticker || typeof ticker !== 'string'){
+        return res.status(400).json({ message: "Ticker é obrigatório." });
+      }
       const stockData = await stockService.fetchStockData(ticker.toUpperCase());
       return res.json(stockData);
     } catch (error) {

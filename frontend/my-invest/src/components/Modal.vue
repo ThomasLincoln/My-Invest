@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import CurrencyInput from "./CurrencyInput.vue";
 import type { CurrencyInputOptions } from "vue-currency-input";
 
@@ -31,6 +31,7 @@ const quantidade = ref(1);
 
 // Criar uma referencia par a o preço
 const preco = ref<number | null>(0.0);
+const precoUnitario = ref<number | null>(0.0);
 
 const opcoesMoeda: CurrencyInputOptions = {
   currency: "BRL",
@@ -48,6 +49,36 @@ function salvar() {
   console.log("Preço (número):", preco.value);
   closeModal();
 }
+
+async function obterInformacaoTicker(ticker: String) {
+  if (ticker.length <= 3) {
+    return;
+  }
+  try {
+    const response = await fetch(
+      `http://localhost:3000/stock/getStockInfo?ticker=${ticker}`,
+      {
+        method: "GET",
+      }
+    );
+
+    if (response.ok) {
+      const dados = await response.json();
+      console.log("Dados salvos com sucesso", dados);
+      precoUnitario.value = dados.regularMarketPrice;
+      preco.value = precoUnitario.value * quantidade.value;
+    } else {
+      console.error("Falha ao salvar dados");
+    }
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+  }
+}
+watch(quantidade, (novaQuantidade) => {
+  if (precoUnitario.value !== null) {
+    preco.value = precoUnitario.value * novaQuantidade;
+  }
+});
 </script>
 
 <template>
@@ -83,8 +114,10 @@ function salvar() {
               type="text"
               name="name"
               id="name"
+              v-model="ticker"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
               placeholder="BBAS3"
+              @change="obterInformacaoTicker(ticker)"
             />
           </div>
           <div class="col-span-2 sm:col-span-1">
